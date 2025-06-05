@@ -46,7 +46,7 @@
 - belongs_to :item
 - has_one :address
 
-## address テーブル
+## addresses テーブル
 | Column             | Type       | Options                        |
 | ------------------ | -----------| ------------------------------ |
 | postal_code        | string     | null: false                    |
@@ -58,4 +58,4 @@
 | order              | references | null: false, foreign_key: true |
 
 ### Association
-- has_one :order
+- belongs_to :order
