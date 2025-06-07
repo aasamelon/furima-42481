@@ -1,6 +1,6 @@
 <% if model.errors.any? %>
-  <div style="color: red;">
-    <ul>
+  <div style="color: red; text-align: center;">
+    <ul style="display: inline-block; text-align: left; padding: 0; margin: 0; list-style: none;">
       <% ordered_messages = [
         "Email can't be blank",
         "Password can't be blank",
@@ -19,7 +19,7 @@
 
       <% ordered_messages.each do |msg| %>
         <% if model.errors.full_messages.include?(msg) %>
-          <li>◦<%= msg %></li>
+          <li>◦ <%= msg %></li>
         <% end %>
       <% end %>
     </ul>
