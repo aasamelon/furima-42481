@@ -1,26 +1,8 @@
 <% if model.errors.any? %>
   <div style="color: red; text-align: center;">
     <ul style="display: inline-block; text-align: left; padding: 0; margin: 0; list-style: none;">
-      <% ordered_messages = [
-        "Email can't be blank",
-        "Password can't be blank",
-        "Nickname can't be blank",
-        "Birth date can't be blank",
-        "Password is invalid. Include both letters and numbers",
-        "Last name can't be blank",
-        "Last name is invalid. Input full-width characters",
-        "First name can't be blank",
-        "First name is invalid. Input full-width characters",
-        "Last name kana can't be blank",
-        "Last name kana is invalid. Input full-width katakana characters",
-        "First name kana can't be blank",
-        "First name kana is invalid. Input full-width katakana characters"
-      ] %>
-
-      <% ordered_messages.each do |msg| %>
-        <% if model.errors.full_messages.include?(msg) %>
-          <li>◦ <%= msg %></li>
-        <% end %>
+      <% model.errors.full_messages.each do |msg| %>
+        <li>◦ <%= msg.gsub(/^(\w+)\s\1/, '\1') %></li>
       <% end %>
     </ul>
   </div>
