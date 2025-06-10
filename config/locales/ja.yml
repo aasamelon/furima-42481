@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        item:
+          attributes:
+            image:
+              blank: "を添付してください"
+            name:
+              blank: "を入力してください"
+            description:
+              blank: "を入力してください"
+            price:
+              blank: "を入力してください"
+              not_a_number: "は半角数字で入力してください"
+              inclusion: "は¥300〜¥9,999,999の間で入力してください"
+            category_id:
+              other_than: "を選択してください"
+            condition_id:
+              other_than: "を選択してください"
+            shipping_fee_id:
+              other_than: "を選択してください"
+            prefecture_id:
+              other_than: "を選択してください"
+            shipping_day_id:
+              other_than: "を選択してください"
