@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :user
-  has_one :order
+  #has_one :order#
   has_one_attached :image
   belongs_to :category
   belongs_to :condition
@@ -27,11 +27,13 @@ class Item < ApplicationRecord
 
   private
 
-  def price_must_be_number_and_in_range
-    unless price.to_s =~ /\A[0-9]+\z/
-      errors.add(:price, "は¥300〜¥9,999,999の間で入力してください")
-      return
-    end
+  validates :price, numericality: {
+    only_integer: true,
+    greater_than_or_equal_to: 300,
+    less_than_or_equal_to: 9_999_999,
+    message: "は¥300〜¥9,999,999の間で入力してください"
+   }
+  end
 
     num = price.to_i
     if num < 300
