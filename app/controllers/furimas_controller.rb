@@ -1,4 +1,5 @@
 class FurimasController < ApplicationController
   def index
-  end
+    @items = Item.all
+  end 
 end

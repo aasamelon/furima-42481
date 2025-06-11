@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "furimas#index"
 
-  resources :items, only: [:new, :create, :edit,:index]
+  resources :items, only: [:new, :create, :edit, :index, :show]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
