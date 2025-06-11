@@ -28,4 +28,8 @@ class Item < ApplicationRecord
     less_than_or_equal_to: 9_999_999,
     message: "は¥300〜¥9,999,999の間で入力してください"
    }
+
+    #def sold_out?
+    #order.present?
+  #end
 end
