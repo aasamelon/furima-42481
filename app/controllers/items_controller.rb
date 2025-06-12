@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @sold_out = false
+    #@sold_out = false
   end
 
 
