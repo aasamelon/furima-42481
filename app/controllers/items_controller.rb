@@ -24,6 +24,12 @@ class ItemsController < ApplicationController
     #@sold_out = false
   end
 
+  def edit
+    @item = Item.find(params[:id])
+      unless current_user == @item.user
+        redirect_to root_path
+      end
+  end
 
   private
 
