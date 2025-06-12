@@ -29,6 +29,33 @@ class ItemsController < ApplicationController
       unless current_user == @item.user
         redirect_to root_path
       end
+
+   @categories = Category.all
+   @conditions = Condition.all
+   @shipping_fees = ShippingFee.all
+   @prefectures = Prefecture.all
+   @shipping_days = ShippingDay.all
+  end
+
+  def update
+    @item = Item.find(params[:id])
+
+    if params[:item][:image].blank? && @item.image.attached?
+      params[:item].delete(:image)
+    end
+
+    if @item.update(item_params)
+     redirect_to @item
+    else
+
+      @categories = Category.all
+      @conditions = Condition.all
+      @shipping_fees = ShippingFee.all
+      @prefectures = Prefecture.all
+      @shipping_days = ShippingDay.all
+
+     render :edit, status: :unprocessable_entity
+    end
   end
 
   private
