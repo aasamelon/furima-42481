@@ -1,4 +1,4 @@
-class ItemShippingForm
+class OrderShippingForm
   include ActiveModel::Model
 
   attr_accessor :name, :price, :description, :category_id, :user_id,
