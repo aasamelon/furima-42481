@@ -1,15 +1,12 @@
 class OrderShippingForm
   include ActiveModel::Model
 
-  attr_accessor :name, :price, :description, :category_id, :user_id,
+  attr_accessor :user_id, :item_id,
                 :postal_code, :prefecture_id, :city, :address, :building, :phone_number
-                
+
   with_options presence: true do
-    validates :name
-    validates :price
-    validates :description
-    validates :category_id
     validates :user_id
+    validates :item_id
     validates :postal_code
     validates :prefecture_id
     validates :city
@@ -18,21 +15,14 @@ class OrderShippingForm
   end
 
   def save
-     item = Item.create(
-      name: name,
-      price: price,
-      description: description,
-      category_id: category_id,
-      user_id: user_id
-    )
-
-     Shipping.create(
-      item_id: item.id,
+    order = Order.create(user_id: user_id, item_id: item_id)
+    Shipping.create(
+      order_id: order.id,
       postal_code: postal_code,
       prefecture_id: prefecture_id,
       city: city,
       address: address,
-      building: building,
+      building_name: building,
       phone_number: phone_number
     )
   end
