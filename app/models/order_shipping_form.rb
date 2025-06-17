@@ -2,7 +2,7 @@ class OrderShippingForm
   include ActiveModel::Model
 
   attr_accessor :user_id, :item_id,
-                :postal_code, :prefecture_id, :city, :address, :building_name, :phone_number
+                :postal_code, :prefecture_id, :city, :address, :building_name, :phone_number, :token
 
   with_options presence: true do
     validates :user_id
@@ -11,9 +11,10 @@ class OrderShippingForm
     validates :city
     validates :address
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid' }
+    validates :token
+    validates :prefecture_id
   end
 
-  validates :prefecture_id, presence: true
   validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
 
   def save

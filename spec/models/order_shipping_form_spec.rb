@@ -12,7 +12,8 @@ RSpec.describe OrderShippingForm, type: :model do
       building_name: 'マンション101',
       phone_number: '09012345678',
       user_id: user.id,
-      item_id: item.id
+      item_id: item.id,
+      token: 'tok_abcdefghijk00000000000000000' # ✅ トークン追加
     )
   end
 
@@ -36,12 +37,12 @@ RSpec.describe OrderShippingForm, type: :model do
       end
 
       it '郵便番号が「3桁-4桁」の形式でないと保存できない' do
-        order_shipping_form.postal_code = '1234567' # ハイフンなし
+        order_shipping_form.postal_code = '1234567'
         order_shipping_form.valid?
         expect(order_shipping_form.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
 
-      it '都道府県が空だと保存できない' do
+      it '都道府県が0だと保存できない' do
         order_shipping_form.prefecture_id = 0
         order_shipping_form.valid?
         expect(order_shipping_form.errors.full_messages).to include("Prefecture can't be blank")
@@ -93,6 +94,12 @@ RSpec.describe OrderShippingForm, type: :model do
         order_shipping_form.item_id = nil
         order_shipping_form.valid?
         expect(order_shipping_form.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it 'tokenが空では保存できない' do
+        order_shipping_form.token = nil
+        order_shipping_form.valid?
+        expect(order_shipping_form.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
