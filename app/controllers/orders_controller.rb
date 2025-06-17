@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
       :prefecture_id,
       :city,
       :address,
-      :building,
+      :building_name,
       :phone_number
     )
   end

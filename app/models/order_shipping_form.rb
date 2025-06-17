@@ -2,7 +2,7 @@ class OrderShippingForm
   include ActiveModel::Model
 
   attr_accessor :user_id, :item_id,
-                :postal_code, :prefecture_id, :city, :address, :building, :phone_number
+                :postal_code, :prefecture_id, :city, :address, :building_name, :phone_number
 
   with_options presence: true do
     validates :user_id
@@ -22,7 +22,7 @@ class OrderShippingForm
       prefecture_id: prefecture_id,
       city: city,
       address: address,
-      building_name: building,
+      building_name: building_name,
       phone_number: phone_number
     )
   end
