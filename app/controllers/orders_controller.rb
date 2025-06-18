@@ -33,14 +33,11 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
-    logger.debug "set_item: item_id=#{@item.id}"
   end
 
   
   def redirect_if_invalid_access
-    logger.debug "redirect_if_invalid_access: current_user_id=#{current_user.id}, item_user_id=#{@item.user_id}, order_present=#{@item.order.present?}"
     if @item.user_id == current_user.id || @item.order.present?
-      logger.debug "redirecting to root_path"
       redirect_to root_path and return
     end
   end

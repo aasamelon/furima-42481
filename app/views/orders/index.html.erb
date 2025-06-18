@@ -34,15 +34,9 @@
     <%# /支払額の表示 %>
 
     <%= form_with model: @order_shipping_form, url: item_orders_path(@item), id: 'charge-form', class: 'transaction-form-wrap', local: true, data: { turbo: false } do |f| %>
-    <% if @order_shipping_form.errors.any? %>
-      <div class="error-messages" style="color: red;">
-        <ul>
-          <% @order_shipping_form.errors.full_messages.each do |message| %>
-            <li> ・ <%= message %></li>
-          <% end %>
-       </ul>
-     </div>
-   <% end %>
+    
+      <%= render "shared/error_messages", model: @order_shipping_form %>
+
 
     <%# カード情報の入力 %>
     <div class='credit-card-form'>

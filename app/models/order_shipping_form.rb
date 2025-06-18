@@ -4,6 +4,10 @@ class OrderShippingForm
   attr_accessor :user_id, :item_id,
                 :postal_code, :prefecture_id, :city, :address, :building_name, :phone_number, :token
 
+validates :user_id, presence: { message: "can't be blank" }
+
+validates :item_id, presence: { message: "can't be blank" }
+
 validates :postal_code, presence: { message: "can't be blank" },
                          format: { with: /\A\d{3}-\d{4}\z/, message: "is invalid. Enter as 123-4567" }
 
