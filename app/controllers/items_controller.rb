@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_form_data, only: [:edit, :update]
+  before_action :move_to_root_if_sold_out, only: [:edit, :update]
 
   def new
     @item = Item.new
@@ -43,6 +44,13 @@ class ItemsController < ApplicationController
     end
   end
 
+    def move_to_root_if_sold_out
+      if @item.order.present?
+        redirect_to root_path
+      end
+    end
+
+
     def destroy
       if @item.user == current_user
         @item.destroy
@@ -51,6 +59,13 @@ class ItemsController < ApplicationController
     end
 
   private
+
+ def redirect_if_sold_out_edit
+    if @item.user_id == current_user.id && @item.order.present?
+    redirect_to root_path
+    end
+  end
+
 
    def set_item
     @item = Item.find(params[:id])
