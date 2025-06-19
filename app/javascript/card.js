@@ -17,17 +17,23 @@ const pay = () => {
 
     payjp.createToken(numberElement).then((response) => {
       if (response.error) {
-        console.error(response.error.message);
-
         const errorMessageContainer = document.querySelector('.error-messages');
         if (errorMessageContainer) {
-          errorMessageContainer.innerHTML = `
-            <ul><li style="color:red;">・${response.error.message}</li></ul>
-          `;
+          const li = document.createElement("li");
+          li.style.color = "red";
+          li.textContent = `◦ ${response.error.message}`;
+
+          let ul = errorMessageContainer.querySelector("ul");
+          if (!ul) {
+            ul = document.createElement("ul");
+            errorMessageContainer.appendChild(ul);
+          }
+          ul.appendChild(li);
         } else {
           alert(response.error.message);
         }
 
+        form.submit();
         return;
       }
 
