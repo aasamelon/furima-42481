@@ -1,7 +1,17 @@
 <% if model.errors.any? %>
   <div style="color: red; text-align: center;">
     <ul style="display: inline-block; text-align: left; padding: 0; margin: 0; list-style: none;">
-      <% model.errors.full_messages.each do |msg| %>
+      <% 
+        messages = model.errors.full_messages
+
+        token_msg = "Token can't be blank"
+        if messages.include?(token_msg)
+          messages.delete(token_msg)
+          messages.unshift(token_msg)
+        end
+
+        messages.each do |msg| 
+      %>
         <li>◦ <%= msg.gsub(/^(\w+)\s\1/, '\1') %></li>
       <% end %>
     </ul>
